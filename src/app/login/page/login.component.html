@@ -1,0 +1,18 @@
+<section class="login">
+  <div class="login__card">
+    <form [formGroup]="loginForm" #form="ngForm" (ngSubmit)="handleSubmit(form)">
+      <app-form-group for="dontCompleteUser" label="Usuário">
+        <input formControlName="user" appInput placeholder="label" id="dontCompleteUser" type="text">
+      </app-form-group>
+      <app-form-group for="dontCompletePass" label="Senha">
+        <input formControlName="password"  autocomplete="new-password" appInput placeholder="label" id="dontCompletePass" type="password">
+      </app-form-group>
+      <div class="login__button">
+        <button [disabled]="isLoading" appButton type="submit">Entrar</button>
+      </div>
+      <div class="login__not-found" *ngIf="error" >
+        <p>Usuário não encontrado</p>
+      </div>
+    </form>
+  </div>
+</section>
