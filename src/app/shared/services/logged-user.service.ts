@@ -1,4 +1,4 @@
-import { UserEntity } from './../entity/userEntity';
+import { UserEntity } from '../entity/user.entity';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 

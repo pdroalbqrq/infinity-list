@@ -1,4 +1,4 @@
-import { UserDTO } from './userDTO';
+import { UserDTO } from './user.dto';
 
 export interface ResultDTO {
   results: UserDTO[];

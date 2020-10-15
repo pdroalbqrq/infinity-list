@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs';
-import { UserEntity } from '../../shared/entity/userEntity';
-import { UserDTO } from '../../shared/dto/userDTO';
+import { UserEntity } from '../../shared/entity/user.entity';
+import { UserDTO } from '../../shared/dto/user.dto';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../shared/services/user.service';
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   private _loginForm: FormGroup;
@@ -17,12 +17,16 @@ export class LoginComponent implements OnInit {
   private _error: boolean;
   private _isLoading: boolean;
 
-  constructor(private _formbuilder: FormBuilder, private _userService: UserService, private router: Router) {}
+  constructor(
+    private _formbuilder: FormBuilder,
+    private _userService: UserService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this._formbuilder.group({
       user: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
@@ -65,7 +69,7 @@ export class LoginComponent implements OnInit {
         }
       },
       (err) => err,
-      () => (this.isLoading = false)
+      () => (this.isLoading = false),
     );
 
     this.loginForm.valueChanges.subscribe(() => {
