@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "waderyan.nodejs-extension-pack",
+    "rbbit.typescript-hero",
+    "angular.ng-template",
+    "esbenp.prettier-vscode",
+    "msjsdiag.debugger-for-chrome",
+    "andys8.jest-snippets",
+    "ms-azuretools.vscode-docker",
+    "sibiraj-s.vscode-scss-formatter"
+  ]
+}
