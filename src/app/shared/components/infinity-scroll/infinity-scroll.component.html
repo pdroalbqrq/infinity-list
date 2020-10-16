@@ -1,2 +1,4 @@
-<ng-content></ng-content>
-<div #anchor></div>
+<div class="infinity-scroll" infinite-scroll [scrollWindow]="false" [infiniteScrollDistance]="1"
+  [infiniteScrollUpDistance]="1" [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()">
+  <ng-content></ng-content>
+</div>

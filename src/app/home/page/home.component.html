@@ -1,1 +1,22 @@
-<p>home works!</p>
+<div class="home__search">
+  <app-form-group for="dontCompletePass" label="Pesquisar pelo nome">
+    <input (keydown)="handleKeyDown($event)" appInput placeholder="label" id="dontCompletePass" type="text">
+  </app-form-group>
+  <div class="home__filter">
+    <span>
+      Filtros:
+    </span>
+    <a id="filter-age" (click)="handleSort('age')" class="home__filter-item">Idade</a>
+    <a id="filter-name" (click)="handleSort('name')" class="home__filter-item">Nome</a>
+
+  </div>
+</div>
+<div class="home__list">
+  <div class="home__list-loading" *ngIf="loading | async">
+    <div class="loader">Loading...</div>
+  </div>
+  <app-infinity-scroll [throttle]="throttle" (scrolled)="onScrollDown()">
+    <app-card *ngFor="let user of array" [user]="user">
+    </app-card>
+  </app-infinity-scroll>
+</div>

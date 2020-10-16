@@ -1,0 +1,10 @@
+<div class="main-header">
+  <div>
+    <h2 *ngIf="user">
+      Bem Vindo {{user.name.first}} !
+    </h2>
+  </div>
+  <div (click)="handleClick($event)" class="main-header__logout">
+    <fa-icon size="lg" [icon]="faSignOutAlt"></fa-icon>
+  </div>
+</div>

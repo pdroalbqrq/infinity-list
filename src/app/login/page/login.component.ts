@@ -1,26 +1,32 @@
-import { Observable, Subject } from 'rxjs';
+import {
+  Observable,
+  ReplaySubject,
+  Subject,
+  Subscriber,
+  Subscription,
+} from 'rxjs';
 import { UserEntity } from '../../shared/entity/user.entity';
 import { UserDTO } from '../../shared/dto/user.dto';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../shared/services/user.service';
+import { LoginService } from '../../shared/services/login.service';
 import { Router } from '@angular/router';
+import { map, take, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   private _loginForm: FormGroup;
-  private _user: UserDTO;
-  private _error: boolean;
+  private _error = false;
   private _isLoading: boolean;
+  private _$destroy: ReplaySubject<boolean> = new ReplaySubject(1);
 
   constructor(
     private _formbuilder: FormBuilder,
-    private _userService: UserService,
-    private router: Router,
+    private _loginService: LoginService,
   ) {}
 
   ngOnInit(): void {
@@ -54,30 +60,32 @@ export class LoginComponent implements OnInit {
     this._isLoading = value;
   }
 
+  // CHAMA O METODO DE LOGIN DO SERVICE LoginService
   handleSubmit(form): void {
     this.isLoading = true;
-    // 'redbutterfly553', 'cuervo'
-    this._userService.login(form.value.user, form.value.password).subscribe(
-      (data) => {
-        if (data) {
-          this.error = false;
-          this._user = data;
-          localStorage.setItem('token', data.login.sha1);
-          this.router.navigate(['/home']);
-        } else {
-          this.error = true;
-        }
-      },
-      (err) => err,
-      () => (this.isLoading = false),
-    );
 
-    this.loginForm.valueChanges.subscribe(() => {
-      this.error = false;
-    });
+    // Usuário e senha válidos
+    // 'redbutterfly553', '123456'
+
+    this._loginService
+      .login(form.value.user, form.value.password)
+      .pipe(takeUntil(this._$destroy))
+      .subscribe(
+        () => {},
+        (err) => (this.error = true),
+        () => (this.isLoading = false),
+      );
+
+    this.loginForm.valueChanges
+      .pipe(takeUntil(this._$destroy))
+      .subscribe(() => {
+        this.error = false;
+        this.isLoading = false;
+      });
   }
 
-  onScroll(): void {
-    console.log('teste');
+  ngOnDestroy(): void {
+    this._$destroy.next(true);
+    this._$destroy.unsubscribe();
   }
 }

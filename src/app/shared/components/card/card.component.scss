@@ -1,0 +1,47 @@
+$primary: #11998e;
+$secondary: #38ef7d;
+
+.card {
+  height: 200px;
+  background: rgb(31, 31, 31);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: double 3px transparent;
+  border-radius: 5px;
+  background-image: linear-gradient(rgb(31, 31, 31), rgb(31, 31, 31)),
+    radial-gradient(circle at top left, $primary, $secondary);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+
+  &__info {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 20px;
+    width: 100%;
+    & > div {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-direction: column;
+      margin-right: 20px;
+      height: 60px;
+    }
+  }
+  &__title {
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: white;
+  }
+
+  &__address {
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    color: white;
+  }
+}

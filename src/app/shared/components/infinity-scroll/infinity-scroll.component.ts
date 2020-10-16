@@ -1,47 +1,27 @@
-import { element } from 'protractor';
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-infinity-scroll',
   templateUrl: './infinity-scroll.component.html',
-  styleUrls: ['./infinity-scroll.component.scss']
+  styleUrls: ['./infinity-scroll.component.scss'],
 })
-export class InfinityScrollComponent implements OnInit, AfterViewInit {
-  private observer: IntersectionObserver;
-  @Input() options = {};
+export class InfinityScrollComponent implements OnInit {
+  private _throttle: number;
   @Output() scrolled = new EventEmitter();
-  @ViewChild('anchor', { static: false }) anchor: ElementRef<HTMLElement>;
 
-  constructor(private host: ElementRef) {}
+  constructor() {}
 
-  ngAfterViewInit(): void {
-    console.log(this.anchor);
-    this.observer.observe(this.anchor.nativeElement);
+  ngOnInit(): void {}
+
+  @Input()
+  get throttle(): number {
+    return this._throttle;
+  }
+  set throttle(value: number) {
+    this._throttle = value;
   }
 
-  ngOnInit(): void {
-    const options = {
-      root: this.isHostScrollable() ? this.element : null,
-      ...this.options
-    };
-
-    this.observer = new IntersectionObserver(([entry]) => {
-      entry.isIntersecting && this.scrolled.emit();
-    }, options);
-  }
-
-  get element(): HTMLElement {
-    const el: HTMLElement = this.host.nativeElement;
-    return el;
-  }
-
-  private isHostScrollable(): boolean {
-    const style = window.getComputedStyle(this.element);
-
-    return style.getPropertyValue('overflow') === 'auto' || style.getPropertyValue('overflow-y') === 'scroll';
-  }
-
-  ngOnDestroy() {
-    this.observer.disconnect();
+  onScrollDown() {
+    this.scrolled.emit();
   }
 }

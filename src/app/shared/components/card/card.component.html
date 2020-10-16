@@ -1,0 +1,27 @@
+<div class="card">
+
+  <app-avatar [img]="user.picture.large">
+  </app-avatar>
+
+  <div class="card__info">
+    <div>
+      <h1 class="card__title">
+        {{user.name?.first}}
+      </h1>
+      <h3 class="card__address">
+        Cidade: {{user.location.city}}
+      </h3>
+    </div>
+    <div>
+      <h3 class="card__address">
+        {{user.dob.age}} anos
+      </h3>
+      <h3 class="card__address">
+        E-mail: {{user.email}}
+      </h3>
+    </div>
+  </div>
+
+  <fa-icon [icon]="faHeart"></fa-icon>
+
+</div>

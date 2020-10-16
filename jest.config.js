@@ -4,19 +4,22 @@ module.exports = {
     'ts-jest': {
       isolatedModules: true,
       tsConfig: '<rootDir>/tsconfig.spec.json',
-      astTransformers: [
-        'jest-preset-angular/build/InlineFilesTransformer',
-        'jest-preset-angular/build/StripStylesTransformer',
-      ],
+      astTransformers: {
+        before: [
+          {
+            path: 'jest-preset-angular/build/InlineFilesTransformer',
+          },
+          {
+            path: 'jest-preset-angular/build/StripStylesTransformer',
+          },
+        ],
+      },
     },
   },
   setupFilesAfterEnv: ['<rootDir>/setupJest.ts'],
   moduleFileExtensions: ['json', 'js', 'ts'],
   testEnvironment: 'jsdom',
-  testMatch: [
-    '*/_tests_//.spec.ts',
-    '*/_tests_//.integration-spec.ts',
-  ],
+  testMatch: ['**/*(*.)@(spec|test).[tj]s?(x)'],
   modulePathIgnorePatterns: ['<rootDir>/dist'],
   testPathIgnorePatterns: [
     '<rootDir>/dist/',

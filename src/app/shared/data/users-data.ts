@@ -19,7 +19,7 @@ const firstUser = new UserEntity({
   login: {
     uuid: '10f874f3-cd1d-4a1c-8a18-b8134d0f44eb',
     username: 'redbutterfly553',
-    password: 'cuervo',
+    password: '123456',
     sha1: '51751d58253d6f9246eacb8b36ceefc6a438cdc9',
   },
   dob: {
@@ -59,7 +59,7 @@ const secondUser = new UserEntity({
   email: 'murat.tutuncu@example.com',
   login: {
     uuid: 'd94bc5b9-95cd-4a21-94b4-66c171ec1f93',
-    username: 'crazypeacock364',
+    username: 'crazyp364',
     password: 'slinky',
     sha1: '2a76c319fecc64f22961342339300629bfc3d251',
   },

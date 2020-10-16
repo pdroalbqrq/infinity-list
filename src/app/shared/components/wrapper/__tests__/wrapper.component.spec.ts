@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WrapperComponent } from './wrapper.component';
+import { WrapperComponent } from '../wrapper.component';
 
 describe('WrapperComponent', () => {
   let component: WrapperComponent;
@@ -8,7 +8,7 @@ describe('WrapperComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [WrapperComponent]
+      declarations: [WrapperComponent],
     }).compileComponents();
   }));
 
@@ -18,7 +18,13 @@ describe('WrapperComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create without header', () => {
+    expect(component).toBeDefined();
+  });
+
+  it('should create with header', () => {
+    component.isLogged = true;
+
+    expect(component.classes.includes('isLoggedHeader')).toBe(true);
   });
 });

@@ -1,5 +1,5 @@
-import { LoggedUser } from './../shared/services/logged-user.service';
 import { UserService } from './../shared/services/user.service';
+import { LoginService } from '../shared/services/login.service';
 import { SharedModule } from './../shared/shared.module';
 import { LoginRoutingModule } from './login-routing.module';
 import { NgModule } from '@angular/core';
@@ -9,7 +9,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LoginComponent],
-  imports: [CommonModule, LoginRoutingModule, SharedModule, ReactiveFormsModule],
-  providers: [UserService, LoggedUser]
+  imports: [
+    CommonModule,
+    LoginRoutingModule,
+    SharedModule,
+    ReactiveFormsModule,
+  ],
+  providers: [LoginService, UserService],
 })
 export class LoginModule {}

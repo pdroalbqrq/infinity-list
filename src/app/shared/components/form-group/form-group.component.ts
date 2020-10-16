@@ -1,13 +1,19 @@
-import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  Input,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 
 @Component({
   selector: 'app-form-group',
   templateUrl: './form-group.component.html',
   styleUrls: ['./form-group.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class FormGroupComponent {
-  private _label: string;
+  private _label = 'Undefined';
   private _forLabel: string;
 
   @Input()
@@ -15,9 +21,6 @@ export class FormGroupComponent {
     return this._label;
   }
   set label(value: string) {
-    if (!value) {
-      console.error('Label precisa de uma referência');
-    }
     this._label = value;
   }
 
@@ -26,8 +29,11 @@ export class FormGroupComponent {
     return this._forLabel;
   }
   set for(value: string) {
+    if (!value) {
+      console.error('Label precisa de uma referência');
+    }
     this._forLabel = value;
   }
 
-  @HostBinding('class.form-group') private formGrup = true;
+  @HostBinding('class.form-group') private formGroup = true;
 }
